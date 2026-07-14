@@ -4,7 +4,7 @@
      name: HotelManagementSystem
 
    datasource:
-     url: jdbc:mysql://localhost:3306/salamdb
+     url: jdbc:mysql://localhost:3306/hotel_db
      username: root
      password: Salam24@
 
