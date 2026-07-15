@@ -16,4 +16,6 @@ public final class AppMessages {
 
     public static final String CUSTOMER_ROLE_NOT_FOUND =
             "Role not found";
+    
+    public static final String VALIDATION_FAILED = "Validation failed";
 }
