@@ -20,3 +20,7 @@
 
  server:
    port: 8082
+
+ jwt:
+    secret: myJwtSecretKeyForHotelManagementSystemApplication2026SpringBootJava21SecureKey
+    expiration: 86400000

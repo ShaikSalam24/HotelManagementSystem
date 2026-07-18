@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hotel.constants.ApiConstants;
+import com.hotel.dto.request.auth.LoginRequest;
 import com.hotel.dto.request.auth.RegisterRequest;
 import com.hotel.dto.response.ApiResponse;
+import com.hotel.dto.response.LoginResponse;
 import com.hotel.service.AuthService;
 
 import jakarta.validation.Valid;
@@ -29,5 +31,12 @@ public class AuthController {
 	    return ResponseEntity
 	            .status(HttpStatus.CREATED)
 	            .body(authService.register(request));
+	}
+	
+	@PostMapping(ApiConstants.LOGIN)
+	public ResponseEntity<ApiResponse<LoginResponse>> login(
+	        @Valid @RequestBody LoginRequest request) {
+
+	    return ResponseEntity.ok(authService.login(request));
 	}
 }

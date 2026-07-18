@@ -18,4 +18,10 @@ public final class AppMessages {
             "Role not found";
     
     public static final String VALIDATION_FAILED = "Validation failed";
+    
+    public static final String USER_NOT_FOUND =
+            "User not found";
+    
+    public static final String LOGIN_SUCCESS =
+            "Login successful";
 }
