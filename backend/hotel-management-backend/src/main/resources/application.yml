@@ -1,26 +1,54 @@
+spring:
+  application:
+    name: HotelManagementSystem
 
- spring:
-   application:
-     name: HotelManagementSystem
+  datasource:
+    url: jdbc:mysql://localhost:3306/hotel_db
+    username: root
+    password: Salam24@
 
-   datasource:
-     url: jdbc:mysql://localhost:3306/hotel_db
-     username: root
-     password: Salam24@
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
-   jpa:
-     hibernate:
-       ddl-auto: update
+server:
+  port: 8082
 
-     show-sql: true
+jwt:
+  secret: myJwtSecretKeyForHotelManagementSystemApplication2026SpringBootJava21SecureKey
+  expiration: 86400000
 
-     properties:
-       hibernate:
-         format_sql: true
-
- server:
-   port: 8082
-
- jwt:
-    secret: myJwtSecretKeyForHotelManagementSystemApplication2026SpringBootJava21SecureKey
-    expiration: 86400000
+# Payment Service Configuration
+payment:
+  # Default payment gateway (RAZORPAY, STRIPE, PAYPAL)
+  default-gateway: RAZORPAY
+  
+  # Transaction ID prefix
+  transaction-id-prefix: TXN
+  
+  # Payment timeout in seconds
+  timeout: 300
+  
+  # Payment webhook configuration (optional, for payment gateway callbacks)
+  webhook:
+    enabled: false
+    path: /api/v1/payments/webhook
+    
+  # Payment gateway credentials (example - add based on your choice)
+  razorpay:
+    enabled: true
+    key-id: rzp_test_TFfw9TxGR93YOT
+    key-secret: L9EXYeJYTql4SlT0FC1IKKbm
+    
+#  stripe:
+#    enabled: false
+#    api-key: your_stripe_api_key
+#    
+#  paypal:
+#    enabled: false
+#    client-id: your_paypal_client_id
+#    client-secret: your_paypal_client_secret

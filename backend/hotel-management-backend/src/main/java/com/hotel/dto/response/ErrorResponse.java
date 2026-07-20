@@ -3,6 +3,10 @@ package com.hotel.dto.response;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import lombok.Builder;
+import lombok.RequiredArgsConstructor;
+
+
 public record ErrorResponse(
         
         LocalDateTime timestamp,

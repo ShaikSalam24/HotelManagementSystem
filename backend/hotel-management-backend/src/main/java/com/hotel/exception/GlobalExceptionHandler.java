@@ -1,22 +1,22 @@
 package com.hotel.exception;
 
 import java.time.LocalDateTime;
-
 import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import org.springframework.security.authorization.AuthorizationDeniedException;
 import com.hotel.constants.AppMessages;
 import com.hotel.dto.response.ErrorResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.Builder;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -114,4 +114,21 @@ public class GlobalExceptionHandler {
 	    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 	            .body(response);
 	}
+	
+@ExceptionHandler(BadRequestException.class)
+public ResponseEntity<ErrorResponse> handleBadRequestException(
+        BadRequestException ex,
+        HttpServletRequest request) {
+
+    ErrorResponse error = new ErrorResponse(
+            LocalDateTime.now(),
+            HttpStatus.BAD_REQUEST.value(),
+            HttpStatus.BAD_REQUEST.getReasonPhrase(),
+            ex.getMessage(),
+            null,
+            request.getRequestURI());
+
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+}
+
 }
