@@ -1,6 +1,7 @@
 package com.hotel.exception;
 
 import java.time.LocalDateTime;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import com.hotel.constants.AppMessages;
 import com.hotel.dto.response.ErrorResponse;
 
@@ -77,6 +79,23 @@ public class GlobalExceptionHandler {
 
 	    return ResponseEntity
 	            .status(HttpStatus.BAD_REQUEST)
+	            .body(response);
+	}
+	
+	@ExceptionHandler(AuthorizationDeniedException.class)
+	public ResponseEntity<ErrorResponse> handleAuthorizationDeniedException(
+	        AuthorizationDeniedException ex,
+	        HttpServletRequest request) {
+
+	    ErrorResponse response = new ErrorResponse(
+	            LocalDateTime.now(),
+	            HttpStatus.FORBIDDEN.value(),
+	            HttpStatus.FORBIDDEN.getReasonPhrase(),
+	            "Access Denied. You do not have permission to access this resource.",
+	            null,
+	            request.getRequestURI());
+
+	    return ResponseEntity.status(HttpStatus.FORBIDDEN)
 	            .body(response);
 	}
 	@ExceptionHandler(Exception.class)
