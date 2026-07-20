@@ -28,7 +28,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
+public class User extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,13 +65,7 @@ public class User {
 	@Column(nullable = false)
 	private Boolean enabled = true;
 
-	@CreationTimestamp
-	@Column(name = "created_at", updatable = false)
-	private LocalDateTime createdAt;
 
-	@UpdateTimestamp
-	@Column(name = "updated_at")
-	private LocalDateTime updatedAt;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "role_id", nullable = false)
@@ -90,6 +84,9 @@ public class User {
 		this.address = address;
 		this.profileImageUrl = profileImageUrl;
 		this.role = role;
+	}
+	public String getFullName() {
+	    return firstName + " " + lastName;
 	}
 
 }
